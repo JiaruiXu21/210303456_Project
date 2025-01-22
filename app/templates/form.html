@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Personalized Watch Recommendation</h1>
+    <form method="POST" action="/">
+        {{ form.hidden_tag() }}
+        <p>{{ form.age_group.label }}<br>{{ form.age_group }}</p>
+        <p>{{ form.profession.label }}<br>{{ form.profession }}</p>
+        <p>{{ form.other_profession.label }}<br>{{ form.other_profession }}</p>
+        <p>{{ form.lifestyle.label }}<br>{{ form.lifestyle }}</p>
+        <p>{{ form.personality.label }}<br>{{ form.personality }}</p>
+        <p>{{ form.design.label }}<br>{{ form.design }}</p>
+        <p>{{ form.price_range.label }}<br>{{ form.price_range }}</p>
+        <p>{{ form.material.label }}<br>{{ form.material }}</p>
+        <p>{{ form.functionality.label }}<br>{{ form.functionality }}</p>
+        <p>{{ form.submit }}</p>
+    </form>
+{% endblock %}
