@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Your Recommendations:</h2>
+<ul>
+    {% for _, watch in recommendations.iterrows() %}
+    <li>
+        <strong>Brand:</strong> {{ watch['Brands'] }} <br>
+        <strong>Collection:</strong> {{ watch['Collection '] if watch['Collection '] is defined else watch['Collection'] }}<br>
+        <strong>Style:</strong> {{ watch['Style'] }} <br>
+    </li>
+    {% endfor %}
+</ul>
+
+<!-- Feedback Form -->
+<h3>Are you satisfied with these recommendations?</h3>
+<form method="POST" action="/feedback">
+    <!-- Hidden fields to store user choices and shown recommendations for logging -->
+    <input type="hidden" name="age_group" value="{{ request.form.age_group }}">
+    <input type="hidden" name="profession" value="{{ request.form.profession }}">
+    <input type="hidden" name="other_profession" value="{{ request.form.other_profession }}">
+    <input type="hidden" name="personality" value="{{ request.form.personality }}">
+    <input type="hidden" name="lifestyle" value="{{ request.form.lifestyle }}">
+    <input type="hidden" name="design" value="{{ request.form.design }}">
+    <input type="hidden" name="price_range" value="{{ request.form.price_range }}">
+    <input type="hidden" name="material" value="{{ request.form.material }}">
+    <input type="hidden" name="functionality" value="{{ request.form.functionality }}">
+
+    <!-- Store recommended watches as JSON in a hidden field -->
+    <input type="hidden" name="recommended_watches" value='{{ recommendations.to_json(orient="records") }}'>
+
+    <button type="submit" name="feedback" value="satisfied">Satisfied</button>
+    <button type="submit" name="feedback" value="not_satisfied">Not Satisfied</button>
+</form>
+{% endblock %}
+
